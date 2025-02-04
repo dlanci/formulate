@@ -37,6 +37,8 @@ config = [
     PFunction(IDs.SQRT, "sqrt"),
     PFunction(IDs.ABS, "abs"),
     PFunction(IDs.WHERE, "where", 3),
+    PFunction(IDs.MIN, 'where', 2),
+    PFunction(IDs.MAX, 'where', 2),    
     PFunction(IDs.LOG, "log"),
     PFunction(IDs.LOG10, "log10"),
     PFunction(IDs.LOG1p, "log1p"),

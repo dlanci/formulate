@@ -19,7 +19,9 @@ class IDs(Enum):
     MUL = auto()
     DIV = auto()
     MOD = auto()
-
+    MIN = auto()
+    MAX = auto()
+    
     LSHIFT = auto()
     RSHIFT = auto()
 
@@ -144,15 +146,17 @@ order_of_operations = [
     # 7
     [IDs.LSHIFT, IDs.RSHIFT],
     # 9
+    [IDs.MIN, IDs.MAX],
+    # 10
     [IDs.LT, IDs.LTEQ],
     [IDs.GT, IDs.GTEQ],
-    # 10
-    [IDs.EQ, IDs.NEQ],
     # 11
-    [IDs.AND],
+    [IDs.EQ, IDs.NEQ],
     # 12
-    [IDs.XOR],
+    [IDs.AND],
     # 13
+    [IDs.XOR],
+    # 14
     [IDs.OR],
 ]
 
