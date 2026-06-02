@@ -36,7 +36,6 @@ config = [
     POperator(IDs.NOT, "~", rhs_only=True),
     PFunction(IDs.SQRT, "sqrt"),
     PFunction(IDs.ABS, "abs"),
-    PFunction(IDs.WHERE, "where", 3),
     PFunction(IDs.MIN, 'where', 2),
     PFunction(IDs.MAX, 'where', 2),    
     PFunction(IDs.LOG, "log"),
