@@ -11,7 +11,7 @@ from .expression import (
     UnnamedConstant,
     ExpressionComponent,
 )
-from .identifiers import order_of_operations, IDs
+from .identifiers import order_of_operations
 from .logging import logger, add_logging
 
 
@@ -137,15 +137,6 @@ class PFunction:
             else:
                 arg = str(arg)
             args.append(arg)
-        if self.id == IDs.MAX:
-            assert len(args) == 2, args
-            a, b = args
-            return f"where( {a} > {b} , {a}, {b})"
-
-        if self.id == IDs.MIN:
-            assert len(args) == 2, args
-            a, b = args
-            return f"where( {a} > {b}, {b}, {a})"
 
         return f"{self.name}(" + ", ".join(args) + ")"
 
