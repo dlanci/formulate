@@ -68,4 +68,4 @@ def from_auto(exp: str, **kwargs: dict[str, Any]) -> AST.AST:
     except lark.LarkError:
         pass
 
-    raise ParsingException("No available backend which can parse: " + exp)
+    raise Exception("No available backend which can parse: " + exp)
