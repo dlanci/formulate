@@ -10,7 +10,7 @@ import lark
 from . import AST, exceptions, toast
 from ._version import __version__
 from .exceptions import ParseError
-
+import re
 __all__ = ["ParseError", "__version__", "from_numexpr", "from_root"]
 
 
@@ -45,3 +45,27 @@ def from_numexpr(exp: str, **kwargs: dict[str, Any]) -> AST.AST:
         new_e = exceptions.debug_numexpr(exp, e)
         raise new_e from e
     return toast.toast(ptree)  # type: ignore[no-any-return]
+
+def from_auto(exp: str, **kwargs: dict[str, Any]) -> AST.AST:
+    # Intelligently detect which kind of string is passed
+    if any(x in exp for x in ["&&", "||", "TMath::", "true", "false"]):
+        return from_root(exp)
+    elif (
+        re.findall(r"([^\&]\&[^\&])|([^\|]\|[^\|])", exp)
+        or "True" in exp
+        or "False" in exp
+    ):
+        return from_numexpr(exp)
+
+    # Intelligently detecting failed so fall back to brute force
+    try:
+        return from_root(exp)
+    except lark.LarkError:
+        pass
+    
+    try:
+        return from_numexpr(exp)
+    except lark.LarkError:
+        pass
+
+    raise ParsingException("No available backend which can parse: " + exp)
