@@ -60,12 +60,16 @@ def from_auto(exp: str, **kwargs: dict[str, Any]) -> AST.AST:
     # Intelligently detecting failed so fall back to brute force
     try:
         return from_root(exp)
-    except lark.LarkError:
+    except lark.LarkError as e:
+        new_e = exceptions.debug_numexpr(exp, e)
+        print(new_e)
         pass
     
     try:
         return from_numexpr(exp)
-    except lark.LarkError:
+    except lark.LarkError as e:
+        new_e = exceptions.debug_numexpr(exp, e)
+        print(new_e)
         pass
 
     raise Exception("No available backend which can parse: " + exp)
