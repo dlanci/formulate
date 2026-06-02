@@ -137,7 +137,6 @@ class PFunction:
             else:
                 arg = str(arg)
             args.append(arg)
-
         return f"{self.name}(" + ", ".join(args) + ")"
 
 
